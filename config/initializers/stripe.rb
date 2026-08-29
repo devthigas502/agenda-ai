@@ -3,16 +3,22 @@
 require "stripe"
 
 # Configure Stripe API keys with fallback for development, test, and build
+stripe_creds = begin
+  Rails.application.credentials.stripe if Rails.application.credentials.present?
+rescue StandardError
+  nil
+end
+
 Stripe.api_key = ENV["STRIPE_SECRET_KEY"].presence ||
-  Rails.application.credentials.dig(:stripe, :secret_key) ||
+  stripe_creds&.dig(:secret_key) ||
   "sk_test_51RTmU5E4uFrfIgDB6IDVuqPJysew3V4lrWdncvGiMdZqHhylZYM0zNPfVpJjM34HzHaBfhnapBQFCWvf7212kwvD00EwzlY3oT"
 
 STRIPE_PUBLISHABLE_KEY = ENV["STRIPE_PUBLISHABLE_KEY"].presence ||
-  Rails.application.credentials.dig(:stripe, :publishable_key) ||
+  stripe_creds&.dig(:publishable_key) ||
   "pk_test_51RTmU5E4uFrfIgDBkRFzL5KfNwoXbpcvWdQC0q5Jn5HIiGr18YE1hTZJFIkc9fhWcoiuIpAiIXjUT8horKMrooTZ00qOx47kws"
 
 STRIPE_WEBHOOK_SECRET = ENV["STRIPE_WEBHOOK_SECRET"].presence ||
-  Rails.application.credentials.dig(:stripe, :webhook_secret)
+  stripe_creds&.dig(:webhook_secret)
 
 module StripePlan
   MONTHLY = {
