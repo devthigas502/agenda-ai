@@ -2,31 +2,17 @@
 
 require "stripe"
 
-# Configure Stripe API keys with fallback for development and test
-Stripe.api_key = ENV.fetch("STRIPE_SECRET_KEY") {
-  if Rails.env.production?
-    Rails.application.credentials.dig(:stripe, :secret_key) ||
-      raise("STRIPE_SECRET_KEY or credentials :stripe :secret_key is required in production")
-  else
-    Rails.application.credentials.dig(:stripe, :secret_key) ||
-      "sk_test_51RTmU5E4uFrfIgDB6IDVuqPJysew3V4lrWdncvGiMdZqHhylZYM0zNPfVpJjM34HzHaBfhnapBQFCWvf7212kwvD00EwzlY3oT"
-  end
-}
+# Configure Stripe API keys with fallback for development, test, and build
+Stripe.api_key = ENV["STRIPE_SECRET_KEY"].presence ||
+  Rails.application.credentials.dig(:stripe, :secret_key) ||
+  "sk_test_51RTmU5E4uFrfIgDB6IDVuqPJysew3V4lrWdncvGiMdZqHhylZYM0zNPfVpJjM34HzHaBfhnapBQFCWvf7212kwvD00EwzlY3oT"
 
-STRIPE_PUBLISHABLE_KEY = ENV.fetch("STRIPE_PUBLISHABLE_KEY") {
-  if Rails.env.production?
-    Rails.application.credentials.dig(:stripe, :publishable_key) ||
-      raise("STRIPE_PUBLISHABLE_KEY or credentials :stripe :publishable_key is required in production")
-  else
-    Rails.application.credentials.dig(:stripe, :publishable_key) ||
-      "pk_test_51RTmU5E4uFrfIgDBkRFzL5KfNwoXbpcvWdQC0q5Jn5HIiGr18YE1hTZJFIkc9fhWcoiuIpAiIXjUT8horKMrooTZ00qOx47kws"
-  end
-}
+STRIPE_PUBLISHABLE_KEY = ENV["STRIPE_PUBLISHABLE_KEY"].presence ||
+  Rails.application.credentials.dig(:stripe, :publishable_key) ||
+  "pk_test_51RTmU5E4uFrfIgDBkRFzL5KfNwoXbpcvWdQC0q5Jn5HIiGr18YE1hTZJFIkc9fhWcoiuIpAiIXjUT8horKMrooTZ00qOx47kws"
 
-
-STRIPE_WEBHOOK_SECRET = ENV.fetch("STRIPE_WEBHOOK_SECRET") {
+STRIPE_WEBHOOK_SECRET = ENV["STRIPE_WEBHOOK_SECRET"].presence ||
   Rails.application.credentials.dig(:stripe, :webhook_secret)
-}
 
 module StripePlan
   MONTHLY = {
