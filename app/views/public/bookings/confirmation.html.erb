@@ -1,0 +1,50 @@
+<div class="max-w-xl mx-auto text-center space-y-6">
+  <!-- Checkmark Icon Animation -->
+  <div class="w-20 h-20 rounded-full bg-emerald-500/10 border-2 border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mx-auto shadow-2xl shadow-emerald-500/20">
+    <svg class="w-10 h-10 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+  </div>
+
+  <div>
+    <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Agendamento Solicitado!</h1>
+    <p class="text-sm text-slate-600 dark:text-slate-400 mt-2">Seu horário foi reservado com sucesso no <strong class="text-slate-800 dark:text-slate-200"><%= @account.name %></strong>.</p>
+  </div>
+
+  <!-- Booking Ticket Details Card -->
+  <div class="bg-white dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 p-6 sm:p-7 rounded-3xl backdrop-blur-xl text-left space-y-4 shadow-sm dark:shadow-2xl transition-colors">
+    <div class="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800">
+      <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Código da Reserva</span>
+      <span class="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400"><%= @booking.id.first(8).upcase %></span>
+    </div>
+
+    <div class="space-y-3 text-sm">
+      <div class="flex justify-between">
+        <span class="text-slate-500 dark:text-slate-400">Serviço:</span>
+        <span class="font-bold text-slate-900 dark:text-white"><%= @booking.service.name %></span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-slate-500 dark:text-slate-400">Profissional:</span>
+        <span class="font-semibold text-slate-800 dark:text-slate-200"><%= @booking.professional.name %></span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-slate-500 dark:text-slate-400">Data e Horário:</span>
+        <span class="font-bold text-indigo-600 dark:text-indigo-300 font-mono"><%= I18n.l(@booking.starts_at, format: :default) %></span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-slate-500 dark:text-slate-400">Cliente:</span>
+        <span class="font-medium text-slate-800 dark:text-slate-200"><%= @booking.client.name %></span>
+      </div>
+
+      <div class="flex justify-between pt-3 border-t border-slate-200 dark:border-slate-800">
+        <span class="text-slate-600 dark:text-slate-400 font-medium">Valor Total:</span>
+        <span class="font-extrabold text-lg text-emerald-600 dark:text-emerald-400"><%= @booking.service.formatted_price %></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="pt-4">
+    <%= link_to "Fazer Novo Agendamento", public_booking_page_path(slug: @account.slug), class: "px-6 py-3 rounded-xl font-bold text-white bg-indigo-600 hover:bg-indigo-500 dark:bg-slate-800 dark:hover:bg-slate-700 transition-all inline-block text-sm shadow-md cursor-pointer" %>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<div>
+  <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+    <div>
+      <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Gestão de Agendamentos</h1>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Lista completa de compromissos com status e filtros.</p>
+    </div>
+
+    <%= link_to new_admin_booking_path, class: "px-4 py-2.5 rounded-xl font-semibold text-sm bg-indigo-600 hover:bg-indigo-500 text-white shadow-md shadow-indigo-500/25 transition-all flex items-center gap-2 cursor-pointer" do %>
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+      Novo Agendamento Manual
+    <% end %>
+  </div>
+
+  <!-- Status Filters Bar -->
+  <div class="flex flex-wrap items-center gap-1.5 mb-6 p-1.5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 backdrop-blur-xl w-fit shadow-xs dark:shadow-none transition-colors">
+    <%= link_to "Todos", admin_bookings_path, class: "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all #{@status.blank? ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'}" %>
+    <%= link_to "Pendentes", admin_bookings_path(status: "pending"), class: "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all #{@status == 'pending' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'}" %>
+    <%= link_to "Confirmados", admin_bookings_path(status: "confirmed"), class: "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all #{@status == 'confirmed' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'}" %>
+    <%= link_to "Concluídos", admin_bookings_path(status: "completed"), class: "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all #{@status == 'completed' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'}" %>
+    <%= link_to "Cancelados", admin_bookings_path(status: "cancelled"), class: "px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all #{@status == 'cancelled' ? 'bg-indigo-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/60'}" %>
+  </div>
+
+  <!-- Bookings List Table -->
+  <div class="bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 rounded-2xl backdrop-blur-xl overflow-hidden shadow-xs dark:shadow-none transition-colors">
+    <div class="divide-y divide-slate-100 dark:divide-slate-800/60">
+      <% @bookings.each do |booking| %>
+        <div class="p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+          <div class="flex items-start gap-4">
+            <div class="px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center min-w-[70px] shadow-xs">
+              <span class="block text-[10px] font-bold text-indigo-600 dark:text-indigo-400 uppercase"><%= booking.starts_at.strftime("%b") %></span>
+              <span class="block text-lg font-extrabold text-slate-900 dark:text-white"><%= booking.starts_at.strftime("%d") %></span>
+              <span class="block text-[10px] text-slate-500 font-mono"><%= booking.starts_at.strftime("%H:%M") %></span>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-base text-slate-900 dark:text-white"><%= booking.client.name %></h4>
+                <span class="text-xs text-slate-500 dark:text-slate-400">• <%= booking.client.phone %></span>
+              </div>
+              <p class="text-xs text-slate-700 dark:text-slate-300"><%= booking.service.name %> (<%= booking.formatted_duration %>)</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Profissional: <span class="text-slate-800 dark:text-slate-200 font-medium"><%= booking.professional.name %></span> • <strong class="text-emerald-600 dark:text-emerald-400 font-bold"><%= booking.service.formatted_price %></strong></p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold
+              <%= case booking.status
+                  when 'confirmed' then 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                  when 'completed' then 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20'
+                  when 'cancelled' then 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20'
+                  when 'no_show' then 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20'
+                  else 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
+                  end %>">
+              <%= booking.status.upcase %>
+            </span>
+
+            <% if booking.pending? %>
+              <%= button_to "Confirmar", confirm_admin_booking_path(booking), method: :patch, class: "px-3 py-1.5 text-xs font-semibold rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer" %>
+            <% end %>
+
+            <% if booking.confirmed? %>
+              <%= button_to "Concluir", complete_admin_booking_path(booking), method: :patch, class: "px-3 py-1.5 text-xs font-semibold rounded-lg bg-blue-600 hover:bg-blue-500 text-white cursor-pointer" %>
+            <% end %>
+
+            <% unless booking.cancelled? || booking.completed? %>
+              <%= button_to "Cancelar", cancel_admin_booking_path(booking), method: :patch, data: { turbo_confirm: "Cancelar agendamento?" }, class: "px-3 py-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 dark:bg-rose-950/60 dark:hover:bg-rose-900/60 dark:text-rose-400 dark:border-rose-900/40 cursor-pointer" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @bookings.empty? %>
+        <div class="p-12 text-center text-slate-400 dark:text-slate-500">
+          <p class="font-medium text-slate-600 dark:text-slate-400">Nenhum agendamento encontrado para este filtro.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

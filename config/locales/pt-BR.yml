@@ -1,0 +1,117 @@
+"pt-BR":
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "A validação falhou: %{errors}"
+        restrict_dependent_destroy:
+          has_one: "Não é possível excluir o registro pois existe um %{record} dependente"
+          has_many: "Não é possível excluir o registro pois existem %{record} dependentes"
+    models:
+      account: Conta
+      user: Usuário
+      professional: Profissional
+      service: Serviço
+      client: Cliente
+      booking: Agendamento
+    attributes:
+      account:
+        name: Nome
+        slug: URL personalizada
+        phone: Telefone
+        email: Email
+        timezone: Fuso horário
+      user:
+        email: Email
+        name: Nome
+        password: Senha
+        password_confirmation: Confirmação de senha
+      professional:
+        name: Nome
+        email: Email
+        phone: Telefone
+        bio: Biografia
+        active: Ativo
+      service:
+        name: Nome
+        description: Descrição
+        duration_minutes: Duração (minutos)
+        price_cents: Preço
+        active: Ativo
+      client:
+        name: Nome
+        email: Email
+        phone: Telefone
+      booking:
+        starts_at: Início
+        ends_at: Fim
+        status: Status
+        notes: Observações
+  date:
+    formats:
+      default: "%d/%m/%Y"
+      short: "%d de %B"
+      long: "%d de %B de %Y"
+    day_names:
+      - Domingo
+      - Segunda-feira
+      - Terça-feira
+      - Quarta-feira
+      - Quinta-feira
+      - Sexta-feira
+      - Sábado
+    abbr_day_names:
+      - Dom
+      - Seg
+      - Ter
+      - Qua
+      - Qui
+      - Sex
+      - Sáb
+    month_names:
+      - ~
+      - Janeiro
+      - Fevereiro
+      - Março
+      - Abril
+      - Maio
+      - Junho
+      - Julho
+      - Agosto
+      - Setembro
+      - Outubro
+      - Novembro
+      - Dezembro
+    abbr_month_names:
+      - ~
+      - Jan
+      - Fev
+      - Mar
+      - Abr
+      - Mai
+      - Jun
+      - Jul
+      - Ago
+      - Set
+      - Out
+      - Nov
+      - Dez
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%H:%M"
+      long: "%d de %B de %Y, %H:%M"
+  helpers:
+    submit:
+      create: "Criar"
+      update: "Atualizar"
+      submit: "Salvar"
+  errors:
+    messages:
+      blank: "não pode ficar em branco"
+      taken: "já está em uso"
+      too_short: "é muito curto (mínimo: %{count} caracteres)"
+      too_long: "é muito longo (máximo: %{count} caracteres)"
+      invalid: "não é válido"
+      not_a_number: "não é um número"
+      greater_than: "deve ser maior que %{count}"
+      greater_than_or_equal_to: "deve ser maior ou igual a %{count}"

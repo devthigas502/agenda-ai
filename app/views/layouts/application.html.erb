@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="h-full font-sans antialiased">
+  <head>
+    <title><%= content_for?(:title) ? yield(:title) : "AgendaAI — Agendamento Inteligente para seu Negócio" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Plataforma SaaS de agendamento online simples, rápida e automatizada para o seu negócio.">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= render "shared/theme_script" %>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <style>
+      body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+  </head>
+
+  <body class="h-full flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 selection:bg-indigo-500 selection:text-white transition-colors duration-200">
+    <%= yield %>
+  </body>
+</html>
+

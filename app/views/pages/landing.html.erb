@@ -1,0 +1,174 @@
+<div class="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col justify-between overflow-hidden relative transition-colors duration-200">
+  <!-- Background Glow Effects -->
+  <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/10 dark:bg-indigo-600/20 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-violet-500/10 dark:bg-violet-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <!-- Navbar -->
+  <header class="max-w-7xl mx-auto px-6 py-6 w-full flex items-center justify-between z-10">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <span class="font-extrabold text-2xl text-slate-900 dark:text-white tracking-tight">Agenda<span class="text-indigo-600 dark:text-indigo-400">AI</span></span>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <%= render "shared/theme_toggle" %>
+      <%= link_to "Entrar", new_user_session_path, class: "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white font-medium text-sm transition-colors" %>
+      <%= link_to "Experimente Grátis", new_user_registration_path, class: "px-5 py-2.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white shadow-lg shadow-indigo-500/25 transition-all transform hover:-translate-y-0.5" %>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="max-w-5xl mx-auto px-6 pt-16 pb-24 text-center z-10">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 text-xs font-semibold mb-8 backdrop-blur-md">
+      <span class="w-2 h-2 rounded-full bg-indigo-500 dark:bg-indigo-400 animate-pulse"></span>
+      Plataforma SaaS de Agendamento em Tempo Real
+    </div>
+
+    <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6">
+      Sua agenda lotada.<br>
+      <span class="bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 dark:from-indigo-400 dark:via-violet-400 dark:to-purple-400 bg-clip-text text-transparent">Sem perder tempo atendendo mensagens.</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Ofereça uma página pública de agendamento 24/7 para seus clientes escolherem serviços, horários e profissionais sozinhos.
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+      <%= link_to new_user_registration_path, class: "w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-indigo-500 via-violet-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-xl shadow-indigo-500/30 transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-3" do %>
+        <span>Criar Minha Agenda Grátis</span>
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+      <% end %>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 backdrop-blur-xl hover:border-indigo-300 dark:hover:border-slate-700/80 shadow-xs dark:shadow-none transition-all">
+        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Página Pública 24/7</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">URL exclusiva (<code class="text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-1.5 py-0.5 rounded font-mono text-xs">agendaai.com.br/seu-negocio</code>) pronta para compartilhar no Instagram e WhatsApp.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 backdrop-blur-xl hover:border-violet-300 dark:hover:border-slate-700/80 shadow-xs dark:shadow-none transition-all">
+        <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 text-violet-600 dark:text-violet-400 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Múltiplos Profissionais</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Gerencie equipes com horários e serviços específicos por profissional sem choques de horário.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 backdrop-blur-xl hover:border-emerald-300 dark:hover:border-slate-700/80 shadow-xs dark:shadow-none transition-all">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Painel de Métricas</h3>
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Controle faturamento estimado, taxa de ocupação, falta de clientes (no-shows) e retenção.</p>
+      </div>
+    <!-- Pricing Section -->
+    <div id="planos" class="pt-20 pb-12 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-4 backdrop-blur-md">
+        14 Dias Grátis • Sem Cartão no Cadastro
+      </div>
+
+      <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">
+        Planos simples e transparentes
+      </h2>
+      <p class="text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto mb-12">
+        Aumente suas reservas, reduza faltas e ganhe tempo livre com o AgendaAI.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left items-stretch">
+        <!-- Plano Mensal -->
+        <div class="rounded-3xl p-8 bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 backdrop-blur-xl flex flex-col justify-between shadow-xs hover:border-indigo-300 dark:hover:border-slate-700 transition-all">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-3 py-1 rounded-full border border-indigo-200 dark:border-indigo-500/30">
+                Plano Mensal
+              </span>
+            </div>
+
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-4xl font-extrabold text-slate-900 dark:text-white">R$ 79,90</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">/ mês</span>
+            </div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-6">Cobrado mensalmente. Cancele quando quiser.</p>
+
+            <ul class="space-y-3.5 mb-8 text-sm text-slate-700 dark:text-slate-300">
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Agendamentos Ilimitados 24/7</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Página Pública Exclusiva</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Múltiplos Profissionais e Serviços</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Painel de Métricas em Tempo Real</span>
+              </li>
+            </ul>
+          </div>
+
+          <%= link_to "Começar 14 Dias Grátis", new_user_registration_path, class: "w-full py-4 px-6 rounded-2xl font-bold text-sm bg-slate-900 hover:bg-slate-800 text-white dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white border border-slate-700/50 shadow-sm transition-all text-center block" %>
+        </div>
+
+        <!-- Plano Anual -->
+        <div class="rounded-3xl p-8 bg-gradient-to-b from-indigo-50/70 via-white to-white dark:from-indigo-950/40 dark:via-slate-900/90 dark:to-slate-900/90 border-2 border-indigo-500 flex flex-col justify-between shadow-xl shadow-indigo-500/10 relative">
+          <div class="absolute -top-3.5 right-6 bg-gradient-to-r from-indigo-500 to-violet-600 text-white text-xs font-extrabold px-3.5 py-1 rounded-full shadow-md uppercase tracking-wide">
+            Economize 42%
+          </div>
+
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-100 dark:bg-indigo-950/60 px-3 py-1 rounded-full border border-indigo-300 dark:border-indigo-500/40">
+                Plano Anual
+              </span>
+            </div>
+
+            <div class="flex items-baseline gap-2 mb-1">
+              <span class="text-4xl font-extrabold text-slate-900 dark:text-white">R$ 549,00</span>
+              <span class="text-sm text-slate-500 dark:text-slate-400 font-medium">/ ano</span>
+            </div>
+            <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mb-6">
+              Apenas R$ 45,75/mês (Economia de R$ 409,80/ano)
+            </p>
+
+            <ul class="space-y-3.5 mb-8 text-sm text-slate-800 dark:text-slate-200">
+              <li class="flex items-center gap-3 font-medium">
+                <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Tudo do Plano Mensal incluído</span>
+              </li>
+              <li class="flex items-center gap-3 font-medium">
+                <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>42% de desconto garantido</span>
+              </li>
+              <li class="flex items-center gap-3 font-medium">
+                <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Acesso prioritário a novas funções</span>
+              </li>
+              <li class="flex items-center gap-3 font-medium">
+                <svg class="w-5 h-5 text-indigo-600 dark:text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                <span>Suporte VIP e onboarding prioritário</span>
+              </li>
+            </ul>
+          </div>
+
+          <%= link_to "Garantir 42% de Desconto", new_user_registration_path, class: "w-full py-4 px-6 rounded-2xl font-bold text-sm bg-gradient-to-r from-indigo-500 via-violet-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white shadow-xl shadow-indigo-500/30 transition-all text-center block transform hover:-translate-y-0.5" %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800/60 py-6 text-center text-xs text-slate-500 z-10">
+    <p>© 2026 AgendaAI. Todos os direitos reservados. 14 dias de teste grátis.</p>
+  </footer>
+</div>
+

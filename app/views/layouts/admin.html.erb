@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="h-full font-sans antialiased">
+  <head>
+    <title>Painel Admin — AgendaAI</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= render "shared/theme_script" %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <style>
+      body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+  </head>
+
+  <body class="h-full flex flex-col md:flex-row bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+    <!-- Sidebar -->
+    <aside class="w-full md:w-64 bg-white/90 dark:bg-slate-900/80 backdrop-blur-md border-r border-slate-200 dark:border-slate-800 flex-shrink-0 flex flex-col justify-between transition-colors">
+      <div>
+        <div class="p-5 border-b border-slate-200 dark:border-slate-800/60 flex items-center justify-between">
+          <a href="<%= admin_root_path %>" class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <div>
+              <span class="font-bold text-lg text-slate-900 dark:text-white tracking-tight">Agenda<span class="text-indigo-600 dark:text-indigo-400">AI</span></span>
+              <p class="text-xs text-slate-500 dark:text-slate-400 truncate max-w-[100px]"><%= current_tenant&.name %></p>
+            </div>
+          </a>
+
+          <%= render "shared/theme_toggle" %>
+        </div>
+
+        <nav class="p-4 space-y-1.5">
+          <%= link_to admin_root_path, class: "flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_root_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+            Dashboard
+          <% end %>
+
+          <%= link_to admin_bookings_path, class: "flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_bookings_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            Agendamentos
+          <% end %>
+
+          <%= link_to admin_professionals_path, class: "flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_professionals_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            Profissionais
+          <% end %>
+
+          <%= link_to admin_services_path, class: "flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_services_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Serviços
+          <% end %>
+
+          <%= link_to admin_clients_path, class: "flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_clients_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            Clientes
+          <% end %>
+
+          <%= link_to admin_subscription_path, class: "flex items-center justify-between px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_subscription_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              <span>Assinatura</span>
+            </div>
+            <% if current_tenant&.trial_active? %>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20"><%= current_tenant.trial_days_left %>d</span>
+            <% elsif current_tenant&.subscription_active? %>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">PRO</span>
+            <% end %>
+          <% end %>
+
+          <%= link_to admin_settings_path, class: "flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all #{current_page?(admin_settings_path) ? 'bg-indigo-50 dark:bg-indigo-600/20 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/30 font-semibold' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200'}" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            Configurações
+          <% end %>
+        </nav>
+      </div>
+
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800/60 space-y-3">
+        <%= link_to public_booking_page_path(slug: current_tenant.slug), target: "_blank", class: "w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-semibold rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all" do %>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          Ver Página Pública
+        <% end %>
+
+        <div class="flex items-center justify-between pt-2">
+          <div class="text-xs truncate max-w-[150px]">
+            <p class="font-medium text-slate-800 dark:text-slate-200 truncate"><%= current_user&.name %></p>
+            <p class="text-slate-500 dark:text-slate-400 text-[11px] truncate"><%= current_user&.email %></p>
+          </div>
+          <%= button_to destroy_user_session_path, method: :delete, class: "text-slate-500 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-all cursor-pointer", title: "Sair" do %>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          <% end %>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto">
+      <% if current_tenant&.trial_active? && current_tenant.trial_days_left <= 5 %>
+        <div class="bg-gradient-to-r from-indigo-500 via-violet-600 to-purple-600 text-white px-6 py-2.5 text-xs font-semibold flex items-center justify-between shadow-md">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Seu período de testes termina em <strong><%= current_tenant.trial_days_left %> dias</strong>. Assine agora e garanta 42% de desconto no plano anual!</span>
+          </div>
+          <%= link_to "Ver Planos ↗", admin_subscription_path, class: "px-3 py-1 bg-white text-indigo-700 rounded-lg font-bold hover:bg-indigo-50 transition-all text-[11px]" %>
+        </div>
+      <% elsif current_tenant&.trial_expired? && !current_tenant.subscription_active? %>
+        <div class="bg-rose-600 text-white px-6 py-2.5 text-xs font-semibold flex items-center justify-between shadow-md">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            <span>Seu período de testes de 14 dias expirou. Ative sua assinatura para continuar recebendo agendamentos.</span>
+          </div>
+          <%= link_to "Assinar Agora ↗", admin_subscription_path, class: "px-3 py-1 bg-white text-rose-700 rounded-lg font-bold hover:bg-rose-50 transition-all text-[11px]" %>
+        </div>
+      <% end %>
+
+      <% if notice %>
+        <div class="m-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-sm flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-500 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span><%= notice %></span>
+          </div>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="m-6 p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-sm flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-rose-500 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span><%= alert %></span>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="p-6 md:p-8 max-w-7xl mx-auto">
+        <%= yield %>
+      </div>
+    </main>
+
+  </body>
+</html>
+

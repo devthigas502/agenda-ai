@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html class="h-full font-sans antialiased">
+  <head>
+    <title><%= @account ? "#{@account.name} — Agendamento Online" : "AgendaAI" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= render "shared/theme_script" %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <style>
+      body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+  </head>
+
+  <body class="min-h-full bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col justify-between transition-colors duration-200">
+    <!-- Header -->
+    <header class="border-b border-slate-200 dark:border-slate-800/60 bg-white/80 dark:bg-slate-900/50 backdrop-blur-xl sticky top-0 z-50 transition-colors">
+      <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/25">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <h1 class="font-bold text-lg text-slate-900 dark:text-white leading-tight"><%= @account&.name %></h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400">Agendamento Online 24/7</p>
+          </div>
+        </div>
+
+        <div>
+          <%= render "shared/theme_toggle" %>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 py-8 px-4 max-w-4xl mx-auto w-full">
+      <%= yield %>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800/40 py-6 text-center text-xs text-slate-500">
+      <p>Desenvolvido por <span class="font-semibold text-slate-700 dark:text-slate-400">AgendaAI</span> — Reservas inteligentes para o seu negócio</p>
+    </footer>
+  </body>
+</html>
+

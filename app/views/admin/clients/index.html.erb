@@ -1,0 +1,36 @@
+<div>
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Clientes</h1>
+      <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Histórico de clientes cadastrados automaticamente pelos agendamentos.</p>
+    </div>
+  </div>
+
+  <div class="bg-white dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 rounded-2xl backdrop-blur-xl overflow-hidden shadow-xs dark:shadow-none transition-colors">
+    <div class="divide-y divide-slate-100 dark:divide-slate-800/60">
+      <% @clients.each do |client| %>
+        <div class="p-5 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-indigo-50 dark:bg-slate-800 border border-indigo-100 dark:border-slate-700 flex items-center justify-center font-bold text-indigo-700 dark:text-slate-300">
+              <%= client.name.first %>
+            </div>
+            <div>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-white"><%= client.name %></h4>
+              <p class="text-xs text-slate-500 dark:text-slate-400"><%= client.phone %> <%= "• #{client.email}" if client.email.present? %></p>
+            </div>
+          </div>
+
+          <div class="text-right text-xs">
+            <span class="font-semibold text-slate-700 dark:text-slate-300"><%= client.bookings.count %> agendamentos</span>
+          </div>
+        </div>
+      <% end %>
+
+      <% if @clients.empty? %>
+        <div class="p-12 text-center text-slate-400 dark:text-slate-500">
+          <p class="font-medium text-slate-600 dark:text-slate-400">Nenhum cliente cadastrado ainda.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

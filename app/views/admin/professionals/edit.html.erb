@@ -1,0 +1,50 @@
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-2xl font-bold text-slate-900 dark:text-white mb-6"><%= @professional.persisted? ? "Editar Profissional" : "Novo Profissional" %></h1>
+
+  <div class="bg-white dark:bg-slate-900/80 border border-slate-200/90 dark:border-slate-800 p-8 rounded-3xl backdrop-blur-xl shadow-sm dark:shadow-none transition-colors">
+    <%= form_with model: [:admin, @professional], class: "space-y-5" do |f| %>
+      <div>
+        <%= f.label :name, "Nome Completo", class: "block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2" %>
+        <%= f.text_field :name, required: true, class: "w-full px-4 py-3 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-colors" %>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <%= f.label :email, "E-mail", class: "block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2" %>
+          <%= f.email_field :email, class: "w-full px-4 py-3 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-colors" %>
+        </div>
+        <div>
+          <%= f.label :phone, "Telefone", class: "block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2" %>
+          <%= f.telephone_field :phone, class: "w-full px-4 py-3 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-colors" %>
+        </div>
+      </div>
+
+      <div>
+        <%= f.label :bio, "Biografia / Especialidade", class: "block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2" %>
+        <%= f.text_area :bio, rows: 3, class: "w-full px-4 py-3 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm transition-colors" %>
+      </div>
+
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Serviços que este profissional atende</label>
+        <div class="space-y-2 max-h-48 overflow-y-auto p-3.5 rounded-xl bg-slate-50/70 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800">
+          <%= f.collection_check_boxes :service_ids, current_tenant.services.active, :id, :name do |b| %>
+            <div class="flex items-center gap-2">
+              <%= b.check_box(class: "rounded border-slate-300 dark:border-slate-800 text-indigo-600 focus:ring-indigo-500") %>
+              <%= b.label(class: "text-sm text-slate-700 dark:text-slate-300") %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 pt-2">
+        <%= f.check_box :active, class: "rounded border-slate-300 dark:border-slate-800 text-indigo-600 focus:ring-indigo-500" %>
+        <%= f.label :active, "Profissional Ativo", class: "text-sm font-medium text-slate-700 dark:text-slate-300" %>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-4">
+        <%= link_to "Cancelar", admin_professionals_path, class: "px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white" %>
+        <%= f.submit "Salvar Profissional", class: "px-6 py-2.5 rounded-xl font-bold text-white bg-indigo-600 hover:bg-indigo-500 cursor-pointer text-sm shadow-sm" %>
+      </div>
+    <% end %>
+  </div>
+</div>
