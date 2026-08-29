@@ -37,6 +37,14 @@ Rails.application.routes.draw do
   # Stripe Webhook
   post "/webhooks/stripe", to: "webhooks/stripe#create"
 
+  # API Namespace (v1)
+  namespace :api do
+    namespace :v1 do
+      post "auth/token", to: "auth_tokens#create"
+      resources :services, only: [:create]
+    end
+  end
+
 
   # Public Booking Page (Scoped by account slug)
   scope "/:slug" do

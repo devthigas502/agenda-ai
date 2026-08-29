@@ -60,5 +60,28 @@
         <%= render "shared/theme_selector" %>
       </div>
     </div>
+
+    <!-- API & MCP Token Section -->
+    <div class="pt-6 border-t border-slate-200 dark:border-slate-800/80">
+      <div class="space-y-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 uppercase tracking-wider">MCP & API</span>
+            <h3 class="text-sm font-bold text-slate-900 dark:text-white">Token de Integração (MCP Server)</h3>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Utilize este token para conectar seu servidor MCP de IA ao Agenda AI e cadastrar serviços automaticamente.</p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+          <div class="truncate">
+            <span class="text-[10px] font-semibold text-slate-400 uppercase tracking-wider block">Seu Token API</span>
+            <code id="api-token-value" class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold select-all"><%= current_user.api_token.presence || "Gere um novo token" %></code>
+          </div>
+          <button type="button" onclick="navigator.clipboard.writeText('<%= current_user.api_token %>'); this.innerText = 'Copiado! 🎉'; setTimeout(() => this.innerText = 'Copiar Token', 2000)" class="px-3 py-1.5 rounded-lg bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold whitespace-nowrap cursor-pointer transition-colors">
+            Copiar Token
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

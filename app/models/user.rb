@@ -7,6 +7,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  # API Authentication Token
+  has_secure_token :api_token
+
   # === Validations ===
   validates :name, presence: true, length: { minimum: 2, maximum: 100 }
   validates :role, presence: true, inclusion: { in: %w[owner admin staff] }
