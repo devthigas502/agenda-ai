@@ -66,7 +66,7 @@ gem "factory_bot_rails", "~> 6.5", groups: [:development, :test]
 gem "shoulda-matchers", "~> 8.0", groups: [:development, :test]
 gem "faker", "~> 3.8", groups: [:development, :test]
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 5.0"
 
 gem "acts_as_tenant", "~> 1.0"
 
