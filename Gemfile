@@ -68,7 +68,7 @@ gem "faker", "~> 3.8", groups: [:development, :test]
 
 gem "devise", "~> 4.9"
 
-gem "acts_as_tenant", "~> 1.0"
+gem "acts_as_tenant", "~> 2.0"
 
 gem "stripe", "~> 13.0"
 
