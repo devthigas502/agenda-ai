@@ -70,7 +70,7 @@ gem "devise", "~> 4.9"
 
 gem "acts_as_tenant", "~> 1.0"
 
-gem "stripe", "~> 13.0"
+gem "stripe", "~> 20.0"
 
 gem "sqlite3", "~> 2.9"
 
